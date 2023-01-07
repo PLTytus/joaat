@@ -1,0 +1,63 @@
+* {
+	--font: #a1a1a1;
+	--bg: #383838;
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+	padding: 5px;
+	background: var(--bg);
+	color: var(--font);
+	justify-content: center;
+	display: flex;
+}
+thead td {
+	text-align: center;
+	font-weight: bold;
+}
+tbody td {
+	text-align: left;
+	font-weight: normal;
+}
+table {
+	border-spacing: 0;
+}
+tr {
+	border: none;
+	outline: none;
+}
+table, td {
+	border: 1px solid var(--font);
+	outline: none;
+}
+td {
+	padding: 2px 5px;
+}
+input[type=text] {
+	outline: 1px groove var(--font) !important;
+	box-shadow: none !important;
+	border: none !important;
+	color: #000;
+	background: #fff;
+}
+input, output {
+	display: inline-block;
+	width: 150px;
+	padding: 1px 2px;
+	margin: 0;
+	font-size: 12px;
+	text-align: left;
+	font-weight: normal;
+}
+[readonly], [disabled] {
+	cursor: default;
+	background: #b7b7b7 !important;
+}
+.result {
+	user-select: all;
+	cursor: default;
+}
+input[type=submit]{
+	width: 100%;
+	text-align: center;
+}
