@@ -1,18 +1,34 @@
 <?php
 
-function joaat($s, $c=null, $m=1/*1|-1*/){
-	$hex = hash("joaat", strtolower($s));
-	$int = base_convert($hex, 16, 10);
+function int32($i){
+	return $i & 0xFFFFFFFF;
+}
 
-	if($c !== null){
-		$int += joaat($c)["unsigned"] * $m;
-		$hex = base_convert($int, 10, 16);
+function signedInt32($i){
+	return $i | (-($i & 0x80000000));
+}
+
+function signedInt8($i){
+	return $i | (-($i & 0x80));
+}
+
+function joaat($str, $cat=null, $m=1/*1|-1*/){
+	$hash = 0;
+	foreach(str_split(mb_strtolower($str)) as $c){
+		$hash = int32($hash + signedInt8(ord($c)));
+		$hash = int32($hash + ($hash << 10));
+		$hash = int32($hash ^ ($hash >> 6));
 	}
+	$hash = int32($hash + ($hash << 3));
+	$hash = int32($hash ^ ($hash >> 11));
+	$hash = int32($hash + ($hash << 15));
+	
+	if($cat !== null) $hash += joaat($cat)["unsigned"] * $m;
 
 	return [
-		"hex" => strtoupper($hex),
-		"unsigned" => $int,
-		"signed" => $int | (-($int & 0x80000000)),
+		"hex" => strtoupper(dechex($hash)),
+		"unsigned" => $hash,
+		"signed" => signedInt32($hash),
 	];
 }
 
