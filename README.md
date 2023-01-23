@@ -1,1 +1,1 @@
-http://pltytus.usermd.net/joaat/
+https://pltytus.usermd.net/joaat/
