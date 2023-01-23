@@ -23,7 +23,7 @@ function joaat($str, $cat=null, $m=1/*1|-1*/){
 	$hash = int32($hash ^ ($hash >> 11));
 	$hash = int32($hash + ($hash << 15));
 	
-	if($cat !== null) $hash += joaat($cat)["unsigned"] * $m;
+	if($cat !== null) $hash = int32($hash + joaat($cat)["unsigned"] * $m);
 
 	return [
 		"hex" => strtoupper(dechex($hash)),
