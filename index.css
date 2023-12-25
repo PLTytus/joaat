@@ -40,9 +40,9 @@ input[type=text] {
 	color: #000;
 	background: #fff;
 }
-input, output {
+input[type=text], output {
 	display: inline-block;
-	width: 150px;
+	width: 250px;
 	padding: 1px 2px;
 	margin: 0;
 	font-size: 12px;
@@ -60,4 +60,14 @@ input, output {
 input[type=submit]{
 	width: 100%;
 	text-align: center;
+}
+label {
+	color: white;
+	cursor: pointer;
+	user-select: none;
+}
+input[type=checkbox] {
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
 }
