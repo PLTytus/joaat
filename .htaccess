@@ -3,3 +3,6 @@ AddType application/x-httpd-php82 .php
 
 Options -Indexes
 RewriteBase /
+
+RewriteEngine on
+RewriteRule ^\.git/ - [F,L]
