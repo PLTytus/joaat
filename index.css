@@ -42,16 +42,46 @@ input[type=text] {
 }
 input[type=text], output {
 	display: inline-block;
-	width: 250px;
 	padding: 1px 2px;
 	margin: 0;
-	font-size: 12px;
 	text-align: left;
 	font-weight: normal;
+}
+input[type=text] {
+	width: 100px;
+	font-size: 12px;
 }
 [readonly], [disabled] {
 	cursor: default;
 	background: #b7b7b7 !important;
+}
+textarea {
+	width: 120px;
+	resize: none;
+	height: 500px;
+	white-space: pre;
+	padding: 2px;
+	border-width: 1px;
+	outline: none !important;
+}
+td:has(textarea)::before {
+	content: attr(data-before);
+	white-space: break-spaces;
+	display: block;
+	float: left;
+	text-align: right;
+	margin-right: 3px;
+	height: 500px;
+	overflow: hidden;
+	padding: 3px 0;
+}
+td:has(textarea)::before, textarea {
+	font-size: 13px;
+	line-height: 1.2;
+	box-sizing: border-box;
+}
+textarea[name="input"]{
+	width: 500px;
 }
 .result {
 	user-select: all;
@@ -62,12 +92,24 @@ input[type=submit]{
 	text-align: center;
 }
 label {
-	color: white;
 	cursor: pointer;
 	user-select: none;
+}
+label:has(input[type="checkbox"]) {
+	color: white;
 }
 input[type=checkbox] {
 	margin: 0;
 	padding: 0;
 	cursor: pointer;
+}
+.nowrap {
+	white-space: nowrap;
+}
+.uselect {
+	cursor: pointer;
+	user-select: all;
+}
+.taleft {
+	text-align: left;
 }

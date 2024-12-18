@@ -3,30 +3,38 @@
 	<head>
 		<title>JENKINS ONE-AT-A-TIME</title>
 		<meta name="robots" content="noindex">
-		<link rel="stylesheet" type="text/css" href="index.css?2">
-		<script type="text/javascript" src="index.js?2"></script>
+		<link rel="stylesheet" type="text/css" href="index.css?3">
+		<script type="text/javascript" src="index.js?3"></script>
 	</head>
 	<body>
 		<form name="joaat">
 			<table>
 				<thead>
 					<tr>
-						<td colspan="4">JENKINS ONE-AT-A-TIME</td>
 					</tr>
 					<tr>
-						<td><label><input type="checkbox" name="trim" checked> trim</label></td>
-						<td><input type="text" name="string"></td>
-						<td>+ <input type="text" class="output_category" disabled value="BASE_GLOBALS"></td>
-						<td><input type="text" name="category" value="BASE_GLOBALS"></td>
+						<td rowspan="2">INPUT<br><label><input type="checkbox" name="trim" checked> trim</label></td>
+						<td class="nowrap">JOAAT</td>
+						<td class="nowrap">+ <input type="text" name="category" value="BASE_GLOBALS"></td>
 					</tr>
-					<tr>
-						<td></td>
-						<td colspan="3"><input type="submit" value="&#8595;&#8595;&#8595; CONVERT &#8595;&#8595;&#8595;"></td>
+					<tr valing="top">
+						<td class="taleft">
+							<label><input type="radio" name="type" value="unsigned"> UNSIGNED</label>
+							<br><label><input type="radio" name="type" value="signed"> SIGNED</label>
+							<br><label><input type="radio" name="type" value="hex" checked> HEX</label>
+						</td>
+						<td class="taleft">
+							[ <output name="unsigned_plus" class="uselect">190769267</output> ]
+							<br>[ <output name="signed_plus" class="uselect">190769267</output> ]
+							<br>[ <output name="hex_plus" class="uselect">B5EE873</output> ]
+						</td>
 					</tr>
 				</thead><tbody>
-					<tr><td>unsigned</td><td id="uint_s" class="result"></td><td id="uint_p" class="result"></td><td id="uint_c" class="result"></td></tr>
-					<tr><td>signed</td><td id="sint_s" class="result"></td><td id="sint_p" class="result"></td><td id="sint_c" class="result"></td></tr>
-					<tr><td>hex</td><td id="hex_s" class="result"></td><td id="hex_p" class="result"></td><td id="hex_c" class="result"></td></tr>
+					<tr>
+						<td data-before="1"><textarea name="input"></textarea></td>
+						<td data-before="1"><textarea name="output" readonly></textarea></td>
+						<td data-before="1"><textarea name="output_plus" readonly></textarea></td>
+					</tr>
 				</tbody>
 			</table>
 		</form>

@@ -1,13 +1,4 @@
 
-const TRANSLATE = {
-	s: "string",
-	p: "plus",
-	c: "category",
-	uint: "unsigned",
-	sint: "signed",
-	hex: "hex",
-};
-
 function int32(i){
 	return i & 0xFFFFFFFF;
 }
@@ -66,29 +57,33 @@ document.onreadystatechange = function(){
 		});
 	});
 
+	document.querySelectorAll("input[type=text], textarea").forEach(input => input.addEventListener("input", () => input.value = input.value.toUpperCase()));
+
+	document.querySelectorAll("textarea").forEach(ta => ta.addEventListener("scroll", () => {
+		document.querySelectorAll("textarea").forEach(at => {
+			if(at !== ta){
+				at.scroll(0, ta.scrollTop);
+			}
+		});
+	}));
+
 	document.querySelector("input[name=category]").addEventListener("input", function(){
-		document.querySelectorAll("input.output_category").forEach(input => input.value = this.value.toUpperCase());
+		Object.entries(joaat(this.value, null, 1, this.form.trim.checked)).forEach(([k, v]) => this.form[k + "_plus"].value = v);
+		this.form.input.dispatchEvent(new Event("input"));
 	});
 
-	document.querySelector("form[name=joaat]").addEventListener("submit", function(e){
-		e.preventDefault();
-		e.stopImmediatePropagation();
+	document.querySelectorAll("[type=radio], [type=checkbox]").forEach(input => input.addEventListener("input", () => input.form.input.dispatchEvent(new Event("input"))));
 
-		document.querySelectorAll(".result").forEach(x => x.innerHTML = "");
+	document.querySelector("[name=input]").addEventListener("input", function(){
+		let trim = this.form.trim.checked;
+		let plus = this.form.category.value;
+		let type = this.form.type.value;
+		let input = this.value.split("\n");
 
-		let t = this.trim.checked
-		let s = this.string.value;
-		let c = this.category.value;
-
-		result = {
-			string: joaat(s, null, 1, t),
-			plus: joaat(s, c, 1, t),
-			category: joaat(c, null, 1, t),
-		};
-
-		document.querySelectorAll(".result").forEach(x => {
-			let t = x.id.split('_');
-			x.innerHTML = result[TRANSLATE[t[1]]][TRANSLATE[t[0]]];
-		});
+		let lines = input.length;
+		this.form.querySelectorAll("td:has(textarea)").forEach(td => td.dataset.before = [...Array(lines).keys()].map(x => x + 1).join("\n"));
+	
+		this.form.output.value = input.map(x => joaat(x, null, 1, trim)[type]).join("\n");
+		this.form.output_plus.value = input.map(x => joaat(x, plus, 1, trim)[type]).join("\n");
 	});
 }
