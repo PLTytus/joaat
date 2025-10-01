@@ -1,6 +1,3 @@
-# set php verision on mydevil.net
-AddType application/x-httpd-php82 .php
-
 Options -Indexes
 RewriteBase /
 
